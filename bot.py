@@ -1,8 +1,14 @@
 import os
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler
 from utils.game_utils import generate_deck
-from utils.redis_utils import save_game, load_game
 
+from utils.redis_utils import save_game, load_game, delete_game
+
+
+# Replace all `active_games[chat_id]` with:
+game = load_game(chat_id)  # Load from Redis
+save_game(chat_id, game)   # Save after updates
+delete_game(chat_id)       # When game ends
 # Initialize bot
 app = Application.builder().token(os.getenv("BOT_TOKEN")).build()
 
