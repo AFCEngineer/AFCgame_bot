@@ -1,7 +1,11 @@
+# utils/redis_utils.py
 import redis
-import json
 import os
+from dotenv import load_dotenv
 
+load_dotenv()  # Load .env file locally (not needed on Railway)
+
+# Connect to Redis
 r = redis.from_url(os.getenv("REDIS_URL"))
 
 def save_game(chat_id, game_state):
